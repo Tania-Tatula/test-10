@@ -32,9 +32,11 @@ cheacbox.addEventListener('change', сhangesThemeOfWindow);
 function сhangesThemeOfWindow(){
    if(bodyColor.classList.contains(Theme.LIGHT)){
     localStorage.setItem('body-color', JSON.stringify(Theme.DARK));
+    cheacbox.checked = true;
     return bodyColor.classList.replace(Theme.LIGHT, Theme.DARK);
    }
    localStorage.setItem('body-color', JSON.stringify(Theme.LIGHT));
+   cheacbox.checked = false;
    return bodyColor.classList.replace(Theme.DARK, Theme.LIGHT);
 }
 
@@ -52,10 +54,9 @@ function auditLocalStorage(){
      if(bodyClass){
         bodyColor.classList.add(JSON.parse(bodyClass));
 
-     
-    //     if(JSON.parse(bodyClass) == Theme.DARK){
-    //         cheacbox.checked = true;
-    //  }
- }
+        if(JSON.parse(bodyClass) == Theme.DARK){
+          cheacbox.checked = true;
+        }
+     }
 }
 
