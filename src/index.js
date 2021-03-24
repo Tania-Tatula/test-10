@@ -14,6 +14,7 @@ cardsMarkup.insertAdjacentHTML("beforeend", foodCardsMarckup);
 
 const cheacbox = document.querySelector('#theme-switch-toggle');
 const bodyColor = document.querySelector('body');
+auditLocalStorage();
 
 
 const Theme = {
@@ -23,23 +24,38 @@ const Theme = {
 
 bodyColor.classList.add(Theme.LIGHT);
 
-console.log(bodyColor);
-cheacbox.addEventListener('change', сhangesThemeOfWindow )
+
+cheacbox.addEventListener('change', сhangesThemeOfWindow);
 
 
 
-  function сhangesThemeOfWindow(){
+function сhangesThemeOfWindow(){
    if(bodyColor.classList.contains(Theme.LIGHT)){
-   
-    bodyColor.classList.remove(Theme.LIGHT);
-    return bodyColor.classList.add(Theme.DARK);
+    localStorage.setItem('body-color', JSON.stringify(Theme.DARK));
+    return bodyColor.classList.replace(Theme.LIGHT, Theme.DARK);
    }
-
-   bodyColor.classList.remove(Theme.DARK);
-   return bodyColor.classList.add(Theme.LIGHT);
-  }
-
+   localStorage.setItem('body-color', JSON.stringify(Theme.LIGHT));
+   return bodyColor.classList.replace(Theme.DARK, Theme.LIGHT);
+}
 
 
-  
-  
+
+function auditLocalStorage(){
+
+    
+    const bodyClass = localStorage.getItem('body-color');
+    const Theme = {
+        LIGHT: 'light-theme',
+        DARK: 'dark-theme',
+      }; 
+
+     if(bodyClass){
+        bodyColor.classList.add(JSON.parse(bodyClass));
+
+     
+    //     if(JSON.parse(bodyClass) == Theme.DARK){
+    //         cheacbox.checked = true;
+    //  }
+ }
+}
+
